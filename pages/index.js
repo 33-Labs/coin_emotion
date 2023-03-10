@@ -15,7 +15,7 @@ const getAllCandles = async () => {
 
 const getCandlesOfSymbol = async (symbol, metadata) => {
   const endpoint = "https://api.binance.com/api/v3/klines"
-  const url = `${endpoint}?symbol=${symbol}USDT&interval=1d&limit=60`
+  const url = `${endpoint}?symbol=${symbol}USDT&interval=1d&limit=90`
   const res = await fetch(url)
   const candles = (await res.json()).sort((a, b) => b[0] - a[0])
   return {
@@ -40,7 +40,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="container mx-auto pb-[300px] max-w-[2560px] min-w-[380px] px-10 min-h-screen bg-white">
+    <div className="container mx-auto pb-[300px] max-w-[2000px] min-w-[380px] px-10 min-h-screen bg-white">
       <div className="flex flex-col">
         <NavigationBar />
         <TokenList tokens={tokens} />
