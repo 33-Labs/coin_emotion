@@ -7,7 +7,7 @@ const getDate = (candle, index) => {
   const date = dateTime.getUTCDate()
   const month = dateTime.getUTCMonth()
   return (
-    <th key={index} scope="col" className="border border-1 px-1 py-1 min-w-[24px] max-w-[24px]">
+    <th key={index} scope="col" className="border border-slate-200 px-1 py-1 min-w-[24px] max-w-[24px]">
       <div className='text-gray-600 text-xs'>{month + 1}</div>
       <div className='text-gray-900 text-sm'>{date}</div>
     </th>
@@ -75,11 +75,11 @@ export default function TokenList(props) {
         <div className="mt-4 flex flex-col w-full shrink-0">
           <div className="px-1 overflow-x-auto">
             <div className="inline-block min-w-full py-2 align-middle">
-              <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded-2xl">
-                <table className="min-w-full divide-y divide-gray-300">
-                  <thead className="bg-gray-50">
+              <div className="block max-h-[700px] overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded-2xl">
+                <table className="min-w-full max-h-[700px] overflow-y-auto block">
+                  <thead className="sticky top-0 bg-gray-50">
                     <tr>
-                      <th scope="col" className="border border-1 px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                         Symbol
                       </th>
                       {
