@@ -14,7 +14,7 @@ const getDate = (candle, index) => {
   )
 }
 
-const getCell = (candle, index) => {
+const getCell = (candle, index, withBottomBorder) => {
   const open = new Decimal(candle[1])
   const close = new Decimal(candle[4])
   const change = close.sub(open)
@@ -25,7 +25,6 @@ const getCell = (candle, index) => {
     color = "bg-green-300"
   } else if (changePercent > 0.05 && changePercent <= 0.10) {
     color = "bg-green-400"
-
   } else if (changePercent > 0.10 && changePercent <= 0.15) {
     color = "bg-green-500"
   } else if (changePercent > 0.15 && changePercent <= 0.20) {
@@ -45,7 +44,7 @@ const getCell = (candle, index) => {
   }
 
   return (
-    <td key={index} className={`w-4 h-4 ${color}`}>
+    <td key={index} className={`w-4 h-4 ${color} ${withBottomBorder ? "border-b-4 border-b-slate-200" : null }`}>
     </td>
   )
 }
@@ -93,18 +92,20 @@ export default function TokenList(props) {
                   </thead>
                   <tbody>
                     {
-                      tokens.map((token, index) => (
+                      tokens.map((token, index) => {
+                        const withBottomBorder = token.metadata.isLast == true
+                        return (
                         <tr key={`tokens-${index}`}>
-                          <td className="border border-1 px-1 py-1 text-sm font-bold text-center">
-                            {`${token.symbol}USDT`}
+                          <td className={`border border-1 px-1 py-1 text-sm font-bold text-center ${token.metadata.group % 2 == 0 ? "bg-white" : "bg-slate-200"} ${token.metadata.isLast ? "border-b-4 border-b-slate-200": null}`}>
+                            {token.symbol}
                           </td>
                           {
                             token.candles.map((c, index) => {
-                              return getCell(c, index)
+                              return getCell(c, index, withBottomBorder)
                             })
                           }
-                        </tr>
-                      ))}
+                        </tr>)
+                      })}
                   </tbody>
                 </table>
               </div>
